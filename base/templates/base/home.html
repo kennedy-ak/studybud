@@ -14,7 +14,7 @@
 <div class="home-container">
     <div>
         <!-- Left column content -->
-    {% include "base/topics_component.html" %}
+    {% include "topics_component.html" %}
     </div>
 
     <div>
@@ -22,13 +22,13 @@
         <h5>{{room_count}} rooms available</h5>
         <a href="{% url 'create-room'%}">Create Room</a>
      
-        {% include "base/feed_component.html" %}
+        {% include "feed_component.html" %}
     </div>
 
     <div>
         <!-- Right column content -->
 
-    {% include "base/activity_component.html" %}
+    {% include "activity_component.html" %}
  
     </div>
 
