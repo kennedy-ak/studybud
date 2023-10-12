@@ -3,33 +3,61 @@
 
 {% block content %}
 
-<h1>{{room.name}}</h1>
-<p> {{room.description}}</p>
+<style>
 
-<div class="comment-wrapper">
-    <h3>Conversations</h3>
-    <hr>
+    .room-container{
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+    }
+</style>
 
-    {% for room_message  in room_messages  %}
 
+<div class= "room-container">
     <div>
-        <small>@{{room_message.user}}  {{room_message.created |timesince}} ago</small>
-        <hr>
-        <p>{{room_message.body}}</body>
+
+        <h1>{{room.name}}</h1>
+        <p> {{room.description}}</p>
+
+        <div class="comment-wrapper">
+            <h3>Conversations</h3>
+            <hr>
+
+            {% for room_message  in room_messages  %}
+
+            <div>
+                <small>@{{room_message.user}}  {{room_message.created |timesince}} ago</small>
+                <hr>
+                <p>{{room_message.body}}</body>
+            </div>
+            
+            {% endfor %}
+
+
+
+        </div>
+        {% if request.user.is_authenticated %}
+        <div class="comment-form">
+            <form action="" method="POST">
+                {%csrf_token%}
+                <input type="text" name="body" placeholder="write your message here..." id="">
+            </form>
+        </div>
+        {% endif %}
+
     </div>
-    
-    {% endfor %}
 
 
+        <div>
+            <h3> Participant</h3>
+            <hr>
+            {% for user in participants  %}
+            <div>
+                <p>@{{user.username}}</p>
+            </div>
+            
+            {% endfor %}
+        </div>
 
 </div>
-{% if request.user.is_authenticated %}
-<div class="comment-form">
-    <form action="" method="POST">
-        {%csrf_token%}
-        <input type="text" name="body" placeholder="write your message here..." id="">
-    </form>
-</div>
-{% endif %}
 {% endblock %}
   
